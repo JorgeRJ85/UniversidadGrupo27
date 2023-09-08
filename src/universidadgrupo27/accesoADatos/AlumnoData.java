@@ -52,8 +52,33 @@ public class AlumnoData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla Alumno");
         }
-        
-        
-        
     }
+    
+     public void modificarAlumno (Alumno alumno){
+            String sql="Update alumno SET dni=?, apellido=?, nombre=?, fechaNacimiento=? "
+                    + "Where idAlumno=?";
+            
+        try {
+            PreparedStatement ps= con.prepareStatement(sql);
+            ps.setInt(1, alumno.getDni());
+            ps.setString(2, alumno.getApellido());
+            ps.setString(3, alumno.getNombre());
+            ps.setDate(4, Date.valueOf(alumno.getFechaNac()));
+            ps.setInt(5, alumno.getIdAlumno());
+            
+            int exito= ps.executeUpdate();
+            
+            if (exito==1) {
+                JOptionPane.showMessageDialog(null, "Alumno modificado");
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumno");
+        }
+            
+         
+         
+         
+        }
+    
 }
