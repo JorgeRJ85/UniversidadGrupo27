@@ -55,11 +55,11 @@ public class UniversidadGrupo27 {
 //        }
        
 
-    Materia mat= new Materia("Lengua",2,true);
+    Materia mat= new Materia("Fisica", 1,true);
     MateriaData mateData= new MateriaData();    
     mateData.guardarMateria(mat);
 
-
+//hola mundo 
         
         
         

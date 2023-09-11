@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import org.mariadb.jdbc.internal.util.dao.PrepareResult;
+
 import universidadgrupo27.entidades.Materia;
 
 
