@@ -55,13 +55,15 @@ public class UniversidadGrupo27 {
 //        }
        
 
-    Materia mat= new Materia("Fisica", 1,true);
-    MateriaData mateData= new MateriaData();    
-    mateData.guardarMateria(mat);
-
-//hola mundo 
-        
-        
+    //Materia mat= new Materia("Fisica", 1,true);
+   MateriaData mateData= new MateriaData();    
+    //mateData.guardarMateria(mat);
+    
+    Materia materiabuscada = mateData.buscarMateria(2);
+   if (materiabuscada != null){
+       System.out.println("Nombre: " + materiabuscada.getNombre() );
+       System.out.println("Año: " + materiabuscada.getAnioMateria());
+   }
         
     }
     
