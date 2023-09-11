@@ -73,7 +73,7 @@ public class AlumnoData {
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Alumno modificado");
             }
-
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumno");
         }
@@ -91,7 +91,7 @@ public class AlumnoData {
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Alumno 'eliminado'");
             }
-
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumno");
         }
@@ -121,7 +121,7 @@ public class AlumnoData {
             } else {
                 JOptionPane.showMessageDialog(null, "No existe ese alumno");
             }
-
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumno");
         }
@@ -152,11 +152,12 @@ public class AlumnoData {
             } else {
                 JOptionPane.showMessageDialog(null, "No existe ese alumno");
             }
-
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumno");
-        }
-        return alumno;
+            }
+            return alumno;
+        
     }
 
     public List<Alumno> listarAlumnos() {
