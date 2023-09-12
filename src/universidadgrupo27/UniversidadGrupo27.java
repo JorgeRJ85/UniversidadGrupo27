@@ -71,7 +71,18 @@ public class UniversidadGrupo27 {
 //
 //    mateData.modificarMateria(quimica);
 
-    mateData.eliminarMateria(1);
+  //  mateData.eliminarMateria(1);
+  
+  
+        for (Materia mm : mateData.listamateria()) {
+            System.out.println("IdMateria: " + mm.getIdMateria());
+            System.out.println("Nombre: " + mm.getNombre());
+            System.out.println("Año: " + mm.getAnioMateria());
+            System.out.println("_________________");
+        }
+      
+  }
+  
 
 
 
