@@ -73,12 +73,36 @@ public class MateriaData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "La tabla matería no se encuentra");
        }
-        return materia;
-        
-        
-        
+        return materia;  
     }
     
-    
+   public void  modificarMateria (Materia materia){
+       String sql="UPDATE materia SET nombre= ?,anio= ? "
+               + "WHERE idMateria= ?";
+       
+        try {
+            PreparedStatement ps= con.prepareStatement(sql);
+            ps.setString(1, materia.getNombre());
+            ps.setInt(2, materia.getAnioMateria());
+            ps.setInt(3, materia.getIdMateria());
+            
+            
+            int exito= ps.executeUpdate();
+             if (exito==1) {
+                JOptionPane.showMessageDialog(null, "Materia modificada con exito");
+                 
+            }
+            
+            ps.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MateriaData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+       
+       
+       
+       
+   }
     
 }
