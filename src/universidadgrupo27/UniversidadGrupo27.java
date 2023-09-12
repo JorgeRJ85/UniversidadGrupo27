@@ -65,12 +65,13 @@ public class UniversidadGrupo27 {
 //       System.out.println("Año: " + materiabuscada.getAnioMateria());
 //   }
 //        
-//    }
-//    
+//    }    
     
-    Materia quimica= new Materia (1, "Quimica", 2, true);
+//    Materia quimica= new Materia (1, "Quimica", 2, true);
+//
+//    mateData.modificarMateria(quimica);
 
-    mateData.modificarMateria(quimica);
+    mateData.eliminarMateria(1);
 
 
 

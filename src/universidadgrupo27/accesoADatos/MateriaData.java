@@ -98,11 +98,27 @@ public class MateriaData {
         } catch (SQLException ex) {
             Logger.getLogger(MateriaData.class.getName()).log(Level.SEVERE, null, ex);
         }
+   }
+   
+   public void eliminarMateria(int id){
        
+       String sql = "UPDATE materia SET estado = 0 WHERE idMateria = ?";
        
-       
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            int exito = ps.executeUpdate();
+            
+            if(exito == 1){
+                JOptionPane.showMessageDialog(null, "Materia eliminada con exito");        
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "La tabla matería no se encuentra");
+        }
        
        
    }
+   
     
 }
