@@ -88,8 +88,36 @@ public class InscripcionData {
             
             JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla");
         }
-            
+    
+        
         }
+    public void borrarInscripcionMateriaAlumno(int idAlumno, int idMateria){
+            
+            String sql= "DELETE FROM inscripcion WHERE idAlumno = ? and idMateria = ?";
+            
+            
+            
+         try {
+             PreparedStatement ps =con.prepareStatement(sql);
+             ps.setInt(1, idAlumno);
+             ps.setInt(2, idMateria);
+             ps.executeUpdate();
+         } catch (SQLException ex) {
+             Logger.getLogger(InscripcionData.class.getName()).log(Level.SEVERE, null, ex);
+         }
+            
+            // try {
+                // PreparedStatement ps=con.prepareStatement(sql);
+                // ps.setInt(1, idAlumno);
+                 //ps.setInt(2, idMateria);
+                 
+                 
+                 
+             //} catch (SQLException ex){
+                // Logger.getLogger(InscripcionData.class.getName()).log(Level.SEVERE, null, ex);
+             }
+            
+       
         
                             
     

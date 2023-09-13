@@ -94,9 +94,9 @@ public class UniversidadGrupo27 {
         Inscripcion ins1=new Inscripcion(alu1,mat1,8);
         //InsData.guardarInscripcion(ins1);
         
-        InsData.actualizarNota(2, 1, 6);
+       //InsData.actualizarNota(2, 1, 6);
         
-        
+        InsData.borrarInscripcionMateriaAlumno(2, 1);
      
   }
   
