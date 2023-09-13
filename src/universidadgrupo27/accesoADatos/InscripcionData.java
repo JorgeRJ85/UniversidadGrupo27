@@ -65,6 +65,35 @@ public class InscripcionData {
     
     
     
+    public void actualizarNota(int idAlumno, int idMateria, double nota){
+        
+       // String sql= "UPDATE inscripcion SET nota = ? WHERE idAlumno = ? and idMateria = ?";
+        String sql= "UPDATE inscripcion SET nota = ? WHERE idAlumno = ? AND idMateria = ?";
+        
+        try {
+            PreparedStatement ps=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            ps.setDouble(1, nota);
+            ps.setInt(2, idAlumno);
+            ps.setInt(3, idMateria);
+            int filas = ps.executeUpdate();
+            
+            System.out.println(filas);
+            if(filas>0){
+                
+                JOptionPane.showMessageDialog(null, "Nota Actualizada");
+            }
+            ps.close();
+
+        }  catch (SQLException ex) {
+            
+            JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla");
+        }
+            
+        }
+        
+                            
+    
+    
 
     
     

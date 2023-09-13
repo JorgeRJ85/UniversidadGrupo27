@@ -92,13 +92,12 @@ public class UniversidadGrupo27 {
         Materia mat1= mateData.buscarMateria(2);
         
         Inscripcion ins1=new Inscripcion(alu1,mat1,8);
-        InsData.guardarInscripcion(ins1);
+        //InsData.guardarInscripcion(ins1);
+        
+        InsData.actualizarNota(2, 1, 6);
         
         
-        
-        
-        
-      
+     
   }
   
 
