@@ -28,8 +28,8 @@ public class InscripcionData {
     //private Alumno alumno;
     
     
-    public void guardarInscripciones (Inscripcion inc){
-        String sql="INSERT INTO `inscripcion`( `nota`, `idAlumno`, `idMateria`) "
+    public void guardarInscripcion (Inscripcion inc){
+        String sql="INSERT INTO `inscripcion`( nota, idAlumno, `idMateria`) "
                 + "VALUES (?, ?, ?)";
         
         Alumno alumno=null;
@@ -37,9 +37,9 @@ public class InscripcionData {
          try {
              PreparedStatement ps= con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
              
-             ps.setInt(1, inc.getIdInscripcion());
-             ps.setInt(2, alumno.getIdAlumno() );
-             ps.setInt(3, materia.getIdMateria());
+             ps.setDouble(1, inc.getNota());
+             ps.setInt(2, inc.getAlumno().getIdAlumno() );
+             ps.setInt(3, inc.getMateria().getIdMateria());
              
              ps.executeUpdate();
              
@@ -49,7 +49,7 @@ public class InscripcionData {
                  
                  JOptionPane.showMessageDialog(null, "Inscripcion agregadaa");
              }
-             
+             ps.close();
              
          } catch (SQLException ex) {
              Logger.getLogger(InscripcionData.class.getName()).log(Level.SEVERE, null, ex);

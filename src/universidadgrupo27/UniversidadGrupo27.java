@@ -6,8 +6,10 @@ import java.time.LocalDate;
 import java.time.Month;
 import universidadgrupo27.accesoADatos.AlumnoData;
 import universidadgrupo27.accesoADatos.Conexion;
+import universidadgrupo27.accesoADatos.InscripcionData;
 import universidadgrupo27.accesoADatos.MateriaData;
 import universidadgrupo27.entidades.Alumno;
+import universidadgrupo27.entidades.Inscripcion;
 import universidadgrupo27.entidades.Materia;
 
 
@@ -73,13 +75,29 @@ public class UniversidadGrupo27 {
 
   //  mateData.eliminarMateria(1);
   
-  
-        for (Materia mm : mateData.listamateria()) {
-            System.out.println("IdMateria: " + mm.getIdMateria());
-            System.out.println("Nombre: " + mm.getNombre());
-            System.out.println("Año: " + mm.getAnioMateria());
-            System.out.println("_________________");
-        }
+  //////////////////////////Materia lista//////////////////
+//        for (Materia mm : mateData.listamateria()) {
+//            System.out.println("IdMateria: " + mm.getIdMateria());
+//            System.out.println("Nombre: " + mm.getNombre());
+//            System.out.println("Año: " + mm.getAnioMateria());
+//            System.out.println("_________________");
+//        }
+        
+        
+        AlumnoData alData= new AlumnoData();
+        InscripcionData InsData= new InscripcionData();
+        
+        
+        Alumno alu1= alData.buscarAlumno(2);
+        Materia mat1= mateData.buscarMateria(2);
+        
+        Inscripcion ins1=new Inscripcion(alu1,mat1,8);
+        InsData.guardarInscripcion(ins1);
+        
+        
+        
+        
+        
       
   }
   
