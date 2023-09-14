@@ -1,6 +1,7 @@
 
 package universidadgrupo27;
 
+import com.oracle.webservices.internal.api.databinding.DatabindingModeFeature;
 import java.sql.Connection;
 import java.time.LocalDate;
 import java.time.Month;
@@ -98,15 +99,24 @@ public class UniversidadGrupo27 {
         
         //InsData.borrarInscripcionMateriaAlumno(2, 1);
         
-        for (Inscripcion inscripcion  : InsData.obtenerInscripciones()) {
-            
-            System.out.println("Id: "+inscripcion.getIdInscripcion());
-            System.out.println("Apellido: "+inscripcion.getAlumno().getApellido());
-            System.out.println("Nombre: "+inscripcion.getAlumno().getNombre());
-            System.out.println("Materia: "+inscripcion.getMateria().getNombre());
-        }
-        
+//        for (Inscripcion inscripcion  : InsData.obtenerInscripciones()) {
+//            
+//            System.out.println("Id: "+inscripcion.getIdInscripcion());
+//            System.out.println("Apellido: "+inscripcion.getAlumno().getApellido());
+//            System.out.println("Nombre: "+inscripcion.getAlumno().getNombre());
+//            System.out.println("Materia: "+inscripcion.getMateria().getNombre());
+//        }
+//        
      
+
+        for (Alumno alumno : InsData.obtenerAlumnoMateria(3) ) {
+            System.out.println("nombre: "+ alumno.getNombre());
+            
+        }
+
+        
+        
+
   }
   
 

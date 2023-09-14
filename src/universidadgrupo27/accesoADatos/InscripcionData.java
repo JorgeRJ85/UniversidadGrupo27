@@ -1,5 +1,6 @@
 package universidadgrupo27.accesoADatos;
 
+import com.sun.javafx.font.FontConstants;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -159,7 +160,7 @@ public class InscripcionData {
         
         ArrayList<Materia> materias = new ArrayList<>();
         
-        String sql = "SELECT inscripcion.idMateria, nombre, año FROM inscripcion,"
+        String sql = "SELECT inscripcion.idMateria, nombre, anio FROM inscripcion,"
                 + " materia WHERE inscripcion.idMateria = materia.idMateria"
                 + " AND inscripcion.idAlumno = ?";
         
@@ -173,7 +174,7 @@ public class InscripcionData {
                 
                 materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setNombre(rs.getString("nombre"));
-                materia.setAnioMateria(rs.getInt("año"));
+                materia.setAnioMateria(rs.getInt("anio"));
                 materias.add(materia);
                 
             }
@@ -201,7 +202,7 @@ public class InscripcionData {
                 
                 materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setNombre(rs.getString("nombre"));
-                materia.setAnioMateria(rs.getInt("año"));
+                materia.setAnioMateria(rs.getInt("anio"));
                 materias.add(materia);
                 
             }
@@ -214,4 +215,35 @@ public class InscripcionData {
         
     }
 
+    public List<Alumno> obtenerAlumnoMateria(int idMateria){
+        ArrayList<Alumno> alumnosMateria=new ArrayList<>();
+        String sql= "SELECT a.idAlumno, dni, nombre, apellido, fechaNacimiento, estado "
+                + "FROM inscripcion i, alumno a WHERE i.idAlumno=a.idAlumno AND idMateria=? AND estado=1";
+        
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, idMateria);
+            
+            ResultSet rs=ps.executeQuery();
+            while (rs.next()) {
+                Alumno alumno=new Alumno();
+                alumno.setIdAlumno(rs.getInt("idAlumno"));
+                alumno.setApellido(rs.getString("apellido"));
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
+                alumno.setActivo(rs.getBoolean("estado"));
+                
+                alumnosMateria.add(alumno);
+                
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla  Materia");
+        }
+        return  alumnosMateria;
+     
+        
+    }
+    
+    
 }
