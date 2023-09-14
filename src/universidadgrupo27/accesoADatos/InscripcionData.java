@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -23,8 +25,9 @@ public class InscripcionData {
         con = Conexion.getConnection();
     }
     
-    private MateriaData matData;
-    private AlumnoData aluData;
+    private MateriaData matData=new MateriaData();
+    
+    private AlumnoData aluData=new AlumnoData();
     //private Alumno alumno;
     
     
@@ -118,7 +121,44 @@ public class InscripcionData {
              }
             
        
+        public List<Inscripcion> obtenerInscripciones() {
+            ArrayList<Inscripcion> cursadas=new ArrayList<>();
+            
+            String sql= "SELECT * FROM  inscripcion";
+            
+            PreparedStatement ps;
+         try {
+             ps = con.prepareStatement(sql);
+             ResultSet rs=ps.executeQuery();
+             
+             while (rs.next()) {
+                 Inscripcion insc=new Inscripcion();
+                 insc.setIdInscripcion(rs.getInt("idInscripto"));
+                 Alumno alu=aluData.buscarAlumno(rs.getInt("idAlumno"));
+                 Materia mate=matData.buscarMateria(rs.getInt("idMateria"));
+                 insc.setAlumno(alu);
+                 insc.setMateria(mate);
+                 insc.setNota(rs.getDouble("nota"));
+                 cursadas.add(insc);
+                 
+                 
+                 
+                 
+                 
+             }
+             
+             ps.close();
+         } catch (SQLException ex) {
+             Logger.getLogger(InscripcionData.class.getName()).log(Level.SEVERE, null, ex);
+         }
+            
+            
+          return cursadas;
+            
+            
         
+            
+    }
                             
     
     

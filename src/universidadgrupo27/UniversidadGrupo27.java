@@ -58,7 +58,7 @@ public class UniversidadGrupo27 {
        
 
     //Materia mat= new Materia("Fisica", 1,true);
-   MateriaData mateData= new MateriaData();    
+    
     //mateData.guardarMateria(mat);
     
 //    Materia materiabuscada = mateData.buscarMateria(2);
@@ -83,7 +83,7 @@ public class UniversidadGrupo27 {
 //            System.out.println("_________________");
 //        }
         
-        
+        MateriaData mateData= new MateriaData();   
         AlumnoData alData= new AlumnoData();
         InscripcionData InsData= new InscripcionData();
         
@@ -91,12 +91,21 @@ public class UniversidadGrupo27 {
         Alumno alu1= alData.buscarAlumno(2);
         Materia mat1= mateData.buscarMateria(2);
         
-        Inscripcion ins1=new Inscripcion(alu1,mat1,8);
+        //Inscripcion ins1=new Inscripcion(alu1,mat1,8);
         //InsData.guardarInscripcion(ins1);
         
        //InsData.actualizarNota(2, 1, 6);
         
-        InsData.borrarInscripcionMateriaAlumno(2, 1);
+        //InsData.borrarInscripcionMateriaAlumno(2, 1);
+        
+        for (Inscripcion inscripcion  : InsData.obtenerInscripciones()) {
+            
+            System.out.println("Id: "+inscripcion.getIdInscripcion());
+            System.out.println("Apellido: "+inscripcion.getAlumno().getApellido());
+            System.out.println("Nombre: "+inscripcion.getAlumno().getNombre());
+            System.out.println("Materia: "+inscripcion.getMateria().getNombre());
+        }
+        
      
   }
   
