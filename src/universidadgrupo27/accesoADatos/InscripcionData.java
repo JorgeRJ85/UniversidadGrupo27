@@ -109,15 +109,7 @@ public class InscripcionData {
              Logger.getLogger(InscripcionData.class.getName()).log(Level.SEVERE, null, ex);
          }
             
-            // try {
-                // PreparedStatement ps=con.prepareStatement(sql);
-                // ps.setInt(1, idAlumno);
-                 //ps.setInt(2, idMateria);
-                 
-                 
-                 
-             //} catch (SQLException ex){
-                // Logger.getLogger(InscripcionData.class.getName()).log(Level.SEVERE, null, ex);
+           
              }
             
        
