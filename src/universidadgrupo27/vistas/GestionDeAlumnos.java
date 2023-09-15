@@ -213,7 +213,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         
         jrEstado.setSelected(true);
         } catch (NullPointerException e) {
-           // JOptionPane.showMessageDialog(this, "El alumno no esta activo o no existe");
+           /// JOptionPane.showMessageDialog(this, "El alumno no esta activo o no existe");
             
         }
         
