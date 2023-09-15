@@ -16,6 +16,9 @@ public class MenuView extends javax.swing.JFrame {
      */
     public MenuView() {
         initComponents();
+        setLocationRelativeTo(null);
+        
+        
     }
 
     /**
@@ -27,8 +30,10 @@ public class MenuView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jdEscritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jmFormularioAlumnos = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -36,7 +41,27 @@ public class MenuView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        javax.swing.GroupLayout jdEscritorioLayout = new javax.swing.GroupLayout(jdEscritorio);
+        jdEscritorio.setLayout(jdEscritorioLayout);
+        jdEscritorioLayout.setHorizontalGroup(
+            jdEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 639, Short.MAX_VALUE)
+        );
+        jdEscritorioLayout.setVerticalGroup(
+            jdEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 429, Short.MAX_VALUE)
+        );
+
         jMenu1.setText("Alumno");
+
+        jmFormularioAlumnos.setText("Formulario de Alumnos");
+        jmFormularioAlumnos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmFormularioAlumnosActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmFormularioAlumnos);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Materia");
@@ -57,15 +82,27 @@ public class MenuView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 639, Short.MAX_VALUE)
+            .addComponent(jdEscritorio)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 429, Short.MAX_VALUE)
+            .addComponent(jdEscritorio)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jmFormularioAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFormularioAlumnosActionPerformed
+        
+        jdEscritorio.removeAll();
+        jdEscritorio.repaint();
+        GestionDeAlumnos gdA= new GestionDeAlumnos();
+        gdA.setVisible(true);
+        jdEscritorio.add(gdA);
+        jdEscritorio.moveToFront(gdA);
+        
+        
+    }//GEN-LAST:event_jmFormularioAlumnosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -109,5 +146,7 @@ public class MenuView extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JDesktopPane jdEscritorio;
+    private javax.swing.JMenuItem jmFormularioAlumnos;
     // End of variables declaration//GEN-END:variables
 }
