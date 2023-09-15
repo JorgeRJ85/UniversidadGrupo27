@@ -8,6 +8,7 @@ package universidadgrupo27.vistas;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import universidadgrupo27.accesoADatos.AlumnoData;
 import universidadgrupo27.entidades.Alumno;
 
@@ -202,14 +203,20 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         
         AlumnoData aluDat= new AlumnoData();
-        Alumno alu=aluDat.buscarAlumnoPorDni(Integer.parseInt(jtDocumento.getText()));
+        try {
+            Alumno alu=aluDat.buscarAlumnoPorDni(Integer.parseInt(jtDocumento.getText()));
         
         jtApellido.setText(alu.getApellido());
         jtNombre.setText(alu.getNombre());
         
         jdFechaNacimiento.setDate(Date.from(alu.getFechaNac().atStartOfDay(ZoneId.systemDefault()).toInstant()));
         
-        jrEstado.setSelected(alu.isActivo());
+        jrEstado.setSelected(true);
+        } catch (NullPointerException e) {
+           // JOptionPane.showMessageDialog(this, "El alumno no esta activo o no existe");
+            
+        }
+        
         
         
         
