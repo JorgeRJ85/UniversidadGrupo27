@@ -45,11 +45,11 @@ public class MenuView extends javax.swing.JFrame {
         jdEscritorio.setLayout(jdEscritorioLayout);
         jdEscritorioLayout.setHorizontalGroup(
             jdEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 639, Short.MAX_VALUE)
+            .addGap(0, 788, Short.MAX_VALUE)
         );
         jdEscritorioLayout.setVerticalGroup(
             jdEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 429, Short.MAX_VALUE)
+            .addGap(0, 627, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Alumno");
@@ -100,6 +100,8 @@ public class MenuView extends javax.swing.JFrame {
         gdA.setVisible(true);
         jdEscritorio.add(gdA);
         jdEscritorio.moveToFront(gdA);
+        
+        
         
         
     }//GEN-LAST:event_jmFormularioAlumnosActionPerformed
