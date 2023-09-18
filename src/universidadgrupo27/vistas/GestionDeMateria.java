@@ -210,10 +210,26 @@ public class GestionDeMateria extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
+        
+        Materia materia = new Materia();
+        MateriaData matdata = new MateriaData();
+        
+        materia.setIdMateria(Integer.parseInt(jtCodigo.getText()));
+        materia.setNombre(jtNombre.getText());
+        materia.setAnioMateria(Integer.parseInt(jtAnio.getText()));
+        materia.setActivo(true);
+        
+        if(jtCodigo.getText() != null){
+            matdata.modificarMateria(materia);
+        }else {        
+        matdata.guardarMateria(materia);
+        }
+        
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
 
