@@ -87,6 +87,11 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         jbGuardar.setText("Guardar");
 
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         jbBuscar.setText("Buscar");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -186,6 +191,17 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         // TODO add your handling code here:
+        
+         
+        AlumnoData aluDat= new AlumnoData(); 
+         
+        Alumno alu1=aluDat.buscarAlumnoPorDni(Integer.parseInt(jtDocumento.getText()));
+        
+        aluDat.eliminarAlumno(alu1.getIdAlumno());
+        
+        
+        
+        
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
@@ -222,6 +238,11 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         
         
     }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+       ///////////////// Boton Salir //////////////////////////
+        dispose();     
+    }//GEN-LAST:event_jbSalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
