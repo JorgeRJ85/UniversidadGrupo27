@@ -85,6 +85,11 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         });
 
         jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -210,7 +215,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         jtApellido.setText("");
         jtNombre.setText("");
         jrEstado.setSelected(false);
-        jdFechaNacimiento.setDate(new Date());
+        jdFechaNacimiento.setDate(null);
 
 
 
@@ -219,6 +224,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         
         AlumnoData aluDat= new AlumnoData();
+        
         try {
             Alumno alu=aluDat.buscarAlumnoPorDni(Integer.parseInt(jtDocumento.getText()));
         
@@ -228,9 +234,10 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         jdFechaNacimiento.setDate(Date.from(alu.getFechaNac().atStartOfDay(ZoneId.systemDefault()).toInstant()));
         
         jrEstado.setSelected(true);
-        } catch (NullPointerException e) {
-           /// JOptionPane.showMessageDialog(this, "El alumno no esta activo o no existe");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El campo DNI debe ser numerico");
             
+        } catch(NullPointerException ex){
         }
         
         
@@ -243,6 +250,25 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
        ///////////////// Boton Salir //////////////////////////
         dispose();     
     }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        // TODO add your handling code here:
+        try{
+        Alumno alu=new Alumno();
+        AlumnoData aluDat= new AlumnoData();
+        alu.setDni(Integer.parseInt(jtDocumento.getText()));
+        alu.setApellido(jtApellido.getText());
+        alu.setNombre(jtNombre.getText());
+        alu.setFechaNac(jdFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        alu.setActivo(true);
+        aluDat.guardarAlumno(alu);
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "El campo DNI debe ser numerico");
+            
+        }
+
+        
+    }//GEN-LAST:event_jbGuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
