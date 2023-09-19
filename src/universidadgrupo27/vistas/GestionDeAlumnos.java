@@ -253,15 +253,31 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
-        try{
         Alumno alu=new Alumno();
         AlumnoData aluDat= new AlumnoData();
+        Alumno alu2=new Alumno();
+        
+        try{
+        int dni=Integer.parseInt(jtDocumento.getText());
         alu.setDni(Integer.parseInt(jtDocumento.getText()));
+        
+        //alu2=aluDat.buscarAlumnoPorDni(Integer.parseInt(jtDocumento.getText()));
         alu.setApellido(jtApellido.getText());
         alu.setNombre(jtNombre.getText());
         alu.setFechaNac(jdFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         alu.setActivo(true);
-        aluDat.guardarAlumno(alu);
+        
+            
+//            if () {
+//                
+//                aluDat.modificarAlumno(alu);
+//                
+//                
+//            }else{
+              aluDat.guardarAlumno(alu);
+            
+        
+        
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(this, "El campo DNI debe ser numerico");
             

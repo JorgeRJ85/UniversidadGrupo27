@@ -202,10 +202,28 @@ public class GestionDeMateria extends javax.swing.JInternalFrame {
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         // TODO add your handling code here:
+        
+        jtNombre.setText("");
+        jtCodigo.setText("");
+        jtAnio.setText("");
+        jrEstado.setSelected(false);
+        
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         // TODO add your handling code here:
+        
+        MateriaData matData=new MateriaData();
+       try {
+            matData.eliminarMateria(Integer.parseInt(jtCodigo.getText()));
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Ingrese Codigo Valido");
+            
+        }
+        
+        
+        
+        
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
