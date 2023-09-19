@@ -33,7 +33,7 @@ public class MateriaData {
             
             ps.setString(1, materia.getNombre());
             ps.setInt(2, materia.getAnioMateria());
-            ps.setBoolean(3, materia.isActivo());
+            ps.setBoolean(3, true);
             
             ps.executeUpdate();
             
@@ -41,6 +41,7 @@ public class MateriaData {
             
             if (rs.next()) {
                 materia.setIdMateria(rs.getInt(1));
+                JOptionPane.showMessageDialog(null, "Materia Guardada con exito");
                 
             }
             ps.close();

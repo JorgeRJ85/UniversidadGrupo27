@@ -187,11 +187,11 @@ public class GestionDeMateria extends javax.swing.JInternalFrame {
             jtAnio.setText(Integer.toString(materia.getAnioMateria()));
             jrEstado.setSelected(true);
 
-        }catch(NullPointerException x){
+        } catch (NullPointerException x) {
             JOptionPane.showMessageDialog(this, "El campo codigo no debe de estar vacio");
-        }catch(NumberFormatException n){
+        } catch (NumberFormatException n) {
             JOptionPane.showMessageDialog(this, "Codigo invalido");
-            
+
         }
 
     }//GEN-LAST:event_jbBuscarActionPerformed
@@ -210,21 +210,31 @@ public class GestionDeMateria extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
-        
+
         Materia materia = new Materia();
+        Materia materia2 = new Materia();
         MateriaData matdata = new MateriaData();
-        
-        materia.setIdMateria(Integer.parseInt(jtCodigo.getText()));
+        int codigo = -1; // Inicializamos la variable codigo
+
+        if (jtCodigo.getText() != null && !jtCodigo.getText().isEmpty()) {
+            codigo = Integer.parseInt(jtCodigo.getText()); // Asignamos el valor si jtCodigo no está vacío
+        }
+        jtCodigo.setText(null);
         materia.setNombre(jtNombre.getText());
         materia.setAnioMateria(Integer.parseInt(jtAnio.getText()));
         materia.setActivo(true);
-        
-        if(jtCodigo.getText() != null){
+        materia2.setNombre(jtNombre.getText());
+        materia2.setAnioMateria(Integer.parseInt(jtAnio.getText()));
+        materia2.setActivo(true);
+
+        if (codigo > 0) {
+            materia.setIdMateria(codigo);
             matdata.modificarMateria(materia);
-        }else {        
-        matdata.guardarMateria(materia);
+
+        } else {
+            matdata.guardarMateria(materia2);
+            JOptionPane.showMessageDialog(this, "Guardada");
         }
-        
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
