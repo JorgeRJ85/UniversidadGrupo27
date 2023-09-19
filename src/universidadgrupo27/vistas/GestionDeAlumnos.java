@@ -7,6 +7,7 @@ package universidadgrupo27.vistas;
 
 import java.time.Instant;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import universidadgrupo27.accesoADatos.AlumnoData;
@@ -261,19 +262,16 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         int dni=Integer.parseInt(jtDocumento.getText());
         alu.setDni(Integer.parseInt(jtDocumento.getText()));
         
-        //alu2=aluDat.buscarAlumnoPorDni(Integer.parseInt(jtDocumento.getText()));
+        
         alu.setApellido(jtApellido.getText());
         alu.setNombre(jtNombre.getText());
         alu.setFechaNac(jdFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         alu.setActivo(true);
         
-            
-//            if () {
-//                
-//                aluDat.modificarAlumno(alu);
-//                
-//                
-//            }else{
+            ArrayList<Alumno> alus=new ArrayList<>();
+            alus=aluDat.listarAlumnos();
+        
+        
               aluDat.guardarAlumno(alu);
             
         
@@ -282,10 +280,11 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "El campo DNI debe ser numerico");
             
         }
-
+        
         
     }//GEN-LAST:event_jbGuardarActionPerformed
 
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
