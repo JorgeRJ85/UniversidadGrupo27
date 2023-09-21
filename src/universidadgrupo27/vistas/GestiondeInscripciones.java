@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import universidadgrupo27.accesoADatos.AlumnoData;
 import universidadgrupo27.entidades.Alumno;
+import universidadgrupo27.entidades.Materia;
 
 /**
  *
@@ -154,7 +155,15 @@ public class GestiondeInscripciones extends javax.swing.JInternalFrame {
     }
     
 
-
+private void cargarTabla(Materia materia){
+    Alumno alu=(Alumno)jComboBox.getSelectedItem();
+   ///modelo.addRow(new Object[]{alu.getIdAlumno(),alu.getNombre(),alu.getA});
+    jrMateriasNoIncriptas.setSelected(true);
+   if () {
+        
+    }
+    
+}
 
 
 
