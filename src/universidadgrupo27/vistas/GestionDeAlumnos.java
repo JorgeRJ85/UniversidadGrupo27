@@ -257,12 +257,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         Alumno alu2 = new Alumno();
 
         try {
-            int dni = Integer.parseInt(jtDocumento.getText());
-            
-
-            
-            
-            
+            int dni = Integer.parseInt(jtDocumento.getText()); 
             System.out.println(alu2);
 
             if (bol != false) {
@@ -270,21 +265,13 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
                 alu2.setNombre(jtNombre.getText());
                 alu2.setFechaNac(jdFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 alu2.setActivo(true);
-                
                 aluDat.modificarAlumno(alu2);
 
             }else {
                 LocalDate fech=jdFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 alu2=new Alumno(dni,jtApellido.getText(),jtNombre.getText(),fech,true);
-                System.out.println("hola");
-                
-                aluDat.guardarAlumno(alu2);
-                
-                 
+                aluDat.guardarAlumno(alu2);  
             }
-
-           
-
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "El campo DNI debe ser numerico");
 
