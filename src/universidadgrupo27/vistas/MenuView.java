@@ -37,6 +37,7 @@ public class MenuView extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jmInscripciones = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
 
@@ -78,6 +79,15 @@ public class MenuView extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Administracion");
+
+        jmInscripciones.setText("Manejo de Inscripciones");
+        jmInscripciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmInscripcionesActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jmInscripciones);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Consultas");
@@ -128,6 +138,21 @@ public class MenuView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jmInscripcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmInscripcionesActionPerformed
+        // TODO add your handling code here:
+        
+        jdEscritorio.removeAll();
+        jdEscritorio.repaint();
+        GestiondeInscripciones gdI = new GestiondeInscripciones();
+        gdI.setVisible(true);
+        jdEscritorio.add(gdI);
+        jdEscritorio.moveToFront(gdI);
+        
+        
+        
+        
+    }//GEN-LAST:event_jmInscripcionesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -173,5 +198,6 @@ public class MenuView extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JDesktopPane jdEscritorio;
     private javax.swing.JMenuItem jmFormularioAlumnos;
+    private javax.swing.JMenuItem jmInscripciones;
     // End of variables declaration//GEN-END:variables
 }
