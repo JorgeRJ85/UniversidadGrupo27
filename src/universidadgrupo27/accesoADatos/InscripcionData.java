@@ -1,6 +1,5 @@
 package universidadgrupo27.accesoADatos;
 
-import com.sun.javafx.font.FontConstants;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

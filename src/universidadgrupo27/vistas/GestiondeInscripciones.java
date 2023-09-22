@@ -200,7 +200,13 @@ public class GestiondeInscripciones extends javax.swing.JInternalFrame {
 
     private void jComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxActionPerformed
         // TODO add your handling code here:
-        
+         Alumno alu = (Alumno) jComboBox.getSelectedItem();
+            if (alu != null) {
+                if (jrMateriaInscriptas.isSelected()) {
+                    cargarTablaInscripta(alu.getIdAlumno());
+                } else if (jrMateriasNoIncriptas.isSelected()) {
+                    cargarTablaNoInscripta(alu.getIdAlumno());
+                }}
         
     }//GEN-LAST:event_jComboBoxActionPerformed
 
