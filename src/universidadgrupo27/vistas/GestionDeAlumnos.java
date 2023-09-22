@@ -258,7 +258,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
 
         try {
             int dni = Integer.parseInt(jtDocumento.getText()); 
-            System.out.println(alu2);
+            
 
             if (bol != false) {
                 alu2.setApellido(jtApellido.getText());
