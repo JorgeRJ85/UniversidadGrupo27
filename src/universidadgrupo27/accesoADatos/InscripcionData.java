@@ -92,8 +92,9 @@ public class InscripcionData {
             ps.setInt(1, idAlumno);
             ps.setInt(2, idMateria);
             ps.executeUpdate();
+            ps.close();
         } catch (SQLException ex) {
-            Logger.getLogger(InscripcionData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al conectarse a la tabla Inscripción");
         }
 
     }

@@ -6,6 +6,7 @@ package universidadgrupo27.vistas;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import universidadgrupo27.accesoADatos.AlumnoData;
 import universidadgrupo27.accesoADatos.InscripcionData;
@@ -115,6 +116,11 @@ public class GestiondeInscripciones extends javax.swing.JInternalFrame {
         });
 
         jbAnularInscripcion.setText("Anular Inscripcion");
+        jbAnularInscripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAnularInscripcionActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -228,7 +234,6 @@ public class GestiondeInscripciones extends javax.swing.JInternalFrame {
         MateriaData matDat=new MateriaData();
         
         int selecF=jTabla.getSelectedRow();
-        int selcC= jTabla.getSelectedColumn();
          
         Alumno alu=(Alumno)jComboBox.getSelectedItem();
        
@@ -240,7 +245,26 @@ public class GestiondeInscripciones extends javax.swing.JInternalFrame {
         Inscripcion incripcion=new Inscripcion(alu,mat,0);
         
         inscDat.guardarInscripcion(incripcion);
+        
+        borrarFilas();
+        cargarTablaNoInscripta(alu.getIdAlumno());
+        
     }//GEN-LAST:event_jbInscribirActionPerformed
+
+    private void jbAnularInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAnularInscripcionActionPerformed
+        // TODO add your handling code here:
+        InscripcionData insData = new InscripcionData();
+          int selecF=jTabla.getSelectedRow();
+          
+        int idMat = (int) jTabla.getValueAt(selecF, 0);
+        
+       Alumno alu=(Alumno) jComboBox.getSelectedItem();
+       
+       insData.borrarInscripcionMateriaAlumno(alu.getIdAlumno(), idMat);
+       JOptionPane.showMessageDialog(null, "Inscripción anulada con exito");
+       borrarFilas();
+        cargarTablaInscripta(alu.getIdAlumno());
+    }//GEN-LAST:event_jbAnularInscripcionActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
