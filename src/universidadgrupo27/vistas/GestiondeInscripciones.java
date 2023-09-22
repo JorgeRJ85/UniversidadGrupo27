@@ -9,7 +9,9 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import universidadgrupo27.accesoADatos.AlumnoData;
 import universidadgrupo27.accesoADatos.InscripcionData;
+import universidadgrupo27.accesoADatos.MateriaData;
 import universidadgrupo27.entidades.Alumno;
+import universidadgrupo27.entidades.Inscripcion;
 import universidadgrupo27.entidades.Materia;
 
 /**
@@ -106,6 +108,11 @@ public class GestiondeInscripciones extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTabla);
 
         jbInscribir.setText("Inscribir");
+        jbInscribir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbInscribirActionPerformed(evt);
+            }
+        });
 
         jbAnularInscripcion.setText("Anular Inscripcion");
 
@@ -213,6 +220,27 @@ public class GestiondeInscripciones extends javax.swing.JInternalFrame {
     private void jComboBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxMouseClicked
+
+    private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
+        // TODO add your handling code here:
+        
+        InscripcionData inscDat= new InscripcionData();
+        MateriaData matDat=new MateriaData();
+        
+        int selecF=jTabla.getSelectedRow();
+        int selcC= jTabla.getSelectedColumn();
+         
+        Alumno alu=(Alumno)jComboBox.getSelectedItem();
+       
+        
+        
+        int buscarId=(int)jTabla.getValueAt(selecF, 0);
+        Materia mat=matDat.buscarMateria(buscarId);
+        
+        Inscripcion incripcion=new Inscripcion(alu,mat,0);
+        
+        inscDat.guardarInscripcion(incripcion);
+    }//GEN-LAST:event_jbInscribirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
