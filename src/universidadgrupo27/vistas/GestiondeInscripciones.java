@@ -264,6 +264,7 @@ public class GestiondeInscripciones extends javax.swing.JInternalFrame {
        JOptionPane.showMessageDialog(null, "Inscripción anulada con exito");
        borrarFilas();
         cargarTablaInscripta(alu.getIdAlumno());
+        //hola
     }//GEN-LAST:event_jbAnularInscripcionActionPerformed
 
 
