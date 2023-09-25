@@ -40,6 +40,7 @@ public class MenuView extends javax.swing.JFrame {
         jmInscripciones = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -100,6 +101,15 @@ public class MenuView extends javax.swing.JFrame {
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Consultas");
+
+        jMenuItem3.setText("Alumno por Materia");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem3);
+
         jMenuBar1.add(jMenu4);
 
         jMenu5.setText("Salir");
@@ -169,6 +179,19 @@ public class MenuView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        
+        jdEscritorio.removeAll();
+        jdEscritorio.repaint();
+        ConsultaDeAlumnoPorMateria cdm = new ConsultaDeAlumnoPorMateria();
+        cdm.setVisible(true);
+        jdEscritorio.add(cdm);
+        jdEscritorio.moveToFront(cdm);
+        
+        
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -213,6 +236,7 @@ public class MenuView extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JDesktopPane jdEscritorio;
     private javax.swing.JMenuItem jmFormularioAlumnos;
     private javax.swing.JMenuItem jmInscripciones;
