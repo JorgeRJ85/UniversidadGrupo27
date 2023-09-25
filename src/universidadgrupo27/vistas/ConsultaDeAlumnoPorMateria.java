@@ -26,6 +26,7 @@ public class ConsultaDeAlumnoPorMateria extends javax.swing.JInternalFrame {
         initComponents();
         cargarCombo();
         armarTabla();
+        borrarFilas();
     }
     private DefaultTableModel modelo= new DefaultTableModel();
    
