@@ -47,7 +47,7 @@ public class InscripcionData {
             if (rs.next()) {
                 inc.setIdInscripcion(rs.getInt(1));
 
-                JOptionPane.showMessageDialog(null, "Inscripcion agregadaa");
+                JOptionPane.showMessageDialog(null, "Inscripcion agregada");
             }
             ps.close();
 
@@ -69,7 +69,6 @@ public class InscripcionData {
             ps.setInt(3, idMateria);
             int filas = ps.executeUpdate();
 
-            System.out.println(filas);
             if (filas > 0) {
 
                 JOptionPane.showMessageDialog(null, "Nota Actualizada");

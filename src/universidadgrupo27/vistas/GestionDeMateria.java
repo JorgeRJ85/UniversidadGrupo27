@@ -232,7 +232,7 @@ public class GestionDeMateria extends javax.swing.JInternalFrame {
         Materia materia = new Materia();
         Materia materia2 = new Materia();
         MateriaData matdata = new MateriaData();
-        int codigo = -1; // Inicializamos la variable codigo
+        int codigo = -1; // Inicializamos la variable codigo con un valor cualquiera
 
         if (jtCodigo.getText() != null && !jtCodigo.getText().isEmpty()) {
             codigo = Integer.parseInt(jtCodigo.getText()); // Asignamos el valor si jtCodigo no está vacío
@@ -241,6 +241,7 @@ public class GestionDeMateria extends javax.swing.JInternalFrame {
         materia.setNombre(jtNombre.getText());
         materia.setAnioMateria(Integer.parseInt(jtAnio.getText()));
         materia.setActivo(true);
+        
         materia2.setNombre(jtNombre.getText());
         materia2.setAnioMateria(Integer.parseInt(jtAnio.getText()));
         materia2.setActivo(true);

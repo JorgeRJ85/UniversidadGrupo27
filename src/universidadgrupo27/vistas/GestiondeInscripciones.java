@@ -28,6 +28,7 @@ public class GestiondeInscripciones extends javax.swing.JInternalFrame {
         initComponents();
         armarCabecera();
         cargarCombo();
+        jTabla.setDefaultEditor(Object.class, null);
     }
 
     private DefaultTableModel modelo = new DefaultTableModel();
@@ -192,7 +193,12 @@ public class GestiondeInscripciones extends javax.swing.JInternalFrame {
 
     private void jrMateriaInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrMateriaInscriptasActionPerformed
         // TODO add your handling code here:
-
+        //*************************************
+        jbInscribir.setEnabled(false);        //Anulo el boton "Inscribir" para evitar Inscribir Materias Repetidas
+        jbAnularInscripcion.setEnabled(true); // Habilito el boton "Anular Inscripcion"
+        
+        //*************************************
+        
         Alumno alu = (Alumno) jComboBox.getSelectedItem();
 
         cargarTablaInscripta(alu.getIdAlumno());
@@ -200,10 +206,16 @@ public class GestiondeInscripciones extends javax.swing.JInternalFrame {
 
     private void jrMateriasNoIncriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrMateriasNoIncriptasActionPerformed
         // TODO add your handling code here:
+        
+        //**************************************
+        jbInscribir.setEnabled(true);           //Habilito el boton "Inscribir" para asignar una materia al alumno
+        jbAnularInscripcion.setEnabled(false);  //Anulo el boton "Anular Inscripcion"
+        //**************************************
+        
         Alumno alu = (Alumno) jComboBox.getSelectedItem();
 
         cargarTablaNoInscripta(alu.getIdAlumno());
-        
+
     }//GEN-LAST:event_jrMateriasNoIncriptasActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
@@ -213,14 +225,7 @@ public class GestiondeInscripciones extends javax.swing.JInternalFrame {
 
     private void jComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxActionPerformed
         // TODO add your handling code here:
-         Alumno alu = (Alumno) jComboBox.getSelectedItem();
-            if (alu != null) {
-                if (jrMateriaInscriptas.isSelected()) {
-                    cargarTablaInscripta(alu.getIdAlumno());
-                } else if (jrMateriasNoIncriptas.isSelected()) {
-                    cargarTablaNoInscripta(alu.getIdAlumno());
-                }}
-        
+
     }//GEN-LAST:event_jComboBoxActionPerformed
 
     private void jComboBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxMouseClicked
@@ -229,42 +234,49 @@ public class GestiondeInscripciones extends javax.swing.JInternalFrame {
 
     private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
         // TODO add your handling code here:
-        
-        InscripcionData inscDat= new InscripcionData();
-        MateriaData matDat=new MateriaData();
-        
-        int selecF=jTabla.getSelectedRow();
-         
-        Alumno alu=(Alumno)jComboBox.getSelectedItem();
-       
-        
-        
-        int buscarId=(int)jTabla.getValueAt(selecF, 0);
-        Materia mat=matDat.buscarMateria(buscarId);
-        
-        Inscripcion incripcion=new Inscripcion(alu,mat,0);
-        
+
+        InscripcionData inscDat = new InscripcionData();
+        MateriaData matDat = new MateriaData();
+        try{
+        int selecF = jTabla.getSelectedRow();
+
+        Alumno alu = (Alumno) jComboBox.getSelectedItem();
+
+        int buscarId = (int) jTabla.getValueAt(selecF, 0);
+        Materia mat = matDat.buscarMateria(buscarId);
+
+        Inscripcion incripcion = new Inscripcion(alu, mat, 0);
+
         inscDat.guardarInscripcion(incripcion);
         
         borrarFilas();
         cargarTablaNoInscripta(alu.getIdAlumno());
-        //holaaa
         
+        }catch(ArrayIndexOutOfBoundsException ar){
+         JOptionPane.showMessageDialog(this, "Debe seleccionar una materia ");   
+        }
+
     }//GEN-LAST:event_jbInscribirActionPerformed
 
     private void jbAnularInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAnularInscripcionActionPerformed
         // TODO add your handling code here:
         InscripcionData insData = new InscripcionData();
-          int selecF=jTabla.getSelectedRow();
-          
-        int idMat = (int) jTabla.getValueAt(selecF, 0);
         
-       Alumno alu=(Alumno) jComboBox.getSelectedItem();
-       
-       insData.borrarInscripcionMateriaAlumno(alu.getIdAlumno(), idMat);
-       JOptionPane.showMessageDialog(null, "Inscripción anulada con exito");
-       borrarFilas();
+        try{
+        int selecF = jTabla.getSelectedRow();
+
+        int idMat = (int) jTabla.getValueAt(selecF, 0);
+
+        Alumno alu = (Alumno) jComboBox.getSelectedItem();
+
+        insData.borrarInscripcionMateriaAlumno(alu.getIdAlumno(), idMat);
+        JOptionPane.showMessageDialog(null, "Inscripción anulada con exito");
+        borrarFilas();
         cargarTablaInscripta(alu.getIdAlumno());
+        
+        }catch(ArrayIndexOutOfBoundsException ar){
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una materia ");
+        }
     }//GEN-LAST:event_jbAnularInscripcionActionPerformed
 
 
@@ -293,22 +305,21 @@ public class GestiondeInscripciones extends javax.swing.JInternalFrame {
             jComboBox.addItem(alumno);
 
         }
-        
+
     }
 
     private void cargarTablaInscripta(int idAlumno) {
-        //AlumnoData aludata = new AlumnoData();
-
+        
         InscripcionData insData = new InscripcionData(); // Instanciamos InscripcionData en "insData" para obtener sus metodos
-
+        
         List<Materia> mate = insData.obtenerMateriaCursada(idAlumno); // Guardamos en "mate" el resultado del Metodos Obtener Materias Cursadas
-
+        
         borrarFilas();
         for (Materia materia1 : mate) {
             modelo.addRow(new Object[]{materia1.getIdMateria(), materia1.getNombre(), materia1.getAnioMateria()});
-
+            
         }
-        
+
     }
 
     private void cargarTablaNoInscripta(int idAlumno) {
