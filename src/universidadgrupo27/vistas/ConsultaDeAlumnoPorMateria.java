@@ -5,9 +5,12 @@
  */
 package universidadgrupo27.vistas;
 
+import java.awt.event.ItemEvent;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import universidadgrupo27.accesoADatos.InscripcionData;
 import universidadgrupo27.accesoADatos.MateriaData;
+import universidadgrupo27.entidades.Alumno;
 import universidadgrupo27.entidades.Materia;
 
 /**
@@ -44,15 +47,18 @@ public class ConsultaDeAlumnoPorMateria extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel2.setText("Seleccione una Materia");
 
+        jComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxItemStateChanged(evt);
+            }
+        });
+
         jTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jTabla.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -130,6 +136,18 @@ public class ConsultaDeAlumnoPorMateria extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTablaComponentHidden
 
+    private void jComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxItemStateChanged
+        // TODO add your handling code here:
+        try{
+            if (evt.getStateChange()==ItemEvent.SELECTED){
+            Materia materia =(Materia) jComboBox.getSelectedItem();
+            cargarTabla(materia.getIdMateria());
+        }  
+        }catch(ArrayIndexOutOfBoundsException ar){
+            System.out.println(ar.getMessage());
+        }   
+    }//GEN-LAST:event_jComboBoxItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<Materia> jComboBox;
@@ -151,6 +169,14 @@ private void cargarCombo(){
         
     }
 }
+private void cargarTabla(int idMateria){
+        InscripcionData insData= new InscripcionData();
+        List<Alumno> alu=insData.obtenerAlumnoMateria(idMateria);
+        borrarFilas();
+        for(Alumno alu1:alu){
+        modelo.addRow(new Object[]{alu1.getIdAlumno(), alu1.getDni(), alu1.getApellido(), alu1.getNombre()});
+        }
+}
 
 private void armarTabla(){
     modelo.addColumn("ID");
@@ -161,19 +187,13 @@ private void armarTabla(){
     jTabla.setModel(modelo);
 }
 
+    private void borrarFilas() {
 
+        int filas = jTabla.getRowCount() - 1;
 
+        for (int i = filas; i >= 0; i--) {
 
-
-
-
-
-
-
-
-
-
-
-
-
+            modelo.removeRow(i);
+        }
+    }
 }
