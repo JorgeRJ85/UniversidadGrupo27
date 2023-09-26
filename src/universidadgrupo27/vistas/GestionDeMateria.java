@@ -233,7 +233,8 @@ public class GestionDeMateria extends javax.swing.JInternalFrame {
         Materia materia2 = new Materia();
         MateriaData matdata = new MateriaData();
         int codigo = -1; // Inicializamos la variable codigo con un valor cualquiera
-
+        
+        try{
         if (jtCodigo.getText() != null && !jtCodigo.getText().isEmpty()) {
             codigo = Integer.parseInt(jtCodigo.getText()); // Asignamos el valor si jtCodigo no está vacío
         }
@@ -253,6 +254,9 @@ public class GestionDeMateria extends javax.swing.JInternalFrame {
         } else {
             matdata.guardarMateria(materia2);
             JOptionPane.showMessageDialog(this, "Guardada");
+        }
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "Formato Invalido" +ex.getMessage());
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
