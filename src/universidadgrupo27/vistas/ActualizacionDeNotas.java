@@ -6,8 +6,11 @@
 package universidadgrupo27.vistas;
 
 import java.awt.event.ItemEvent;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import universidadgrupo27.accesoADatos.AlumnoData;
 import universidadgrupo27.accesoADatos.InscripcionData;
@@ -25,12 +28,30 @@ public class ActualizacionDeNotas extends javax.swing.JInternalFrame {
     /**
      * Creates new form ActualizacionDeNotas
      */
+    private int filaAnterior = -1;
+    
     public ActualizacionDeNotas() {
+        
         initComponents();
         armarCabecera();
         cargarCombo();
+        
+        jTabla.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+        @Override
+        public void valueChanged(ListSelectionEvent e) {
+            if (!e.getValueIsAdjusting()) {
+                int filaActual = jTabla.getSelectedRow();
+                if (filaActual != filaAnterior && filaAnterior != -1) {
+                    guardarNota(filaAnterior);
+                }
+                filaAnterior = filaActual;
+            }
+        }
+    });
     }
-
+    
+    
+    
     private DefaultTableModel modelo = new DefaultTableModel() {
         // Hacer que las columnas 1 y 2 no sean editables
         @Override
@@ -85,15 +106,17 @@ public class ActualizacionDeNotas extends javax.swing.JInternalFrame {
 
         jTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTabla.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTablaKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTabla);
 
         jbGuardar.setText("Guardar");
@@ -164,6 +187,7 @@ public class ActualizacionDeNotas extends javax.swing.JInternalFrame {
 
     private void jComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxItemStateChanged
         // TODO add your handling code here:
+        borrarFilas();
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             Alumno alumno = (Alumno) jComboBox.getSelectedItem();
             cargarTabla(alumno.getIdAlumno());
@@ -174,26 +198,11 @@ public class ActualizacionDeNotas extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
-        InscripcionData inscData = new InscripcionData();
-        Alumno alumno = (Alumno) jComboBox.getSelectedItem();
-        try {
-            Integer idMateria = (Integer) jTabla.getValueAt(jTabla.getSelectedRow(), 0);
-            String nota = jTabla.getValueAt(jTabla.getSelectedRow(), 2).toString();
-            Double notaAlumno = Double.parseDouble(nota);
-
-            if (notaAlumno >= 0 && notaAlumno <= 10) {
-
-                inscData.actualizarNota(alumno.getIdAlumno(), idMateria, notaAlumno);
-            } else {
-                JOptionPane.showMessageDialog(this, "La calificacion debe estar entre 0 y 10");
-            }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Error en el valor Nota " + ex.getMessage());
-        }
-
+        guardarNota(jTabla.getSelectedRow());
     }//GEN-LAST:event_jbGuardarActionPerformed
-
-
+    private void jTablaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTablaKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTablaKeyPressed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<Alumno> jComboBox;
     private javax.swing.JLabel jLabel1;
@@ -208,13 +217,9 @@ public class ActualizacionDeNotas extends javax.swing.JInternalFrame {
     private void cargarCombo() {
 
         AlumnoData aludat = new AlumnoData();
-
         List<Alumno> alumnos = aludat.listarAlumnos();
-
         for (Alumno alumno : alumnos) {
-
             jComboBox.addItem(alumno);
-
         }
     }
 
@@ -240,5 +245,26 @@ public class ActualizacionDeNotas extends javax.swing.JInternalFrame {
             modelo.removeRow(i);
         }
     }
+    
+    private void guardarNota(int fila){
+        if(fila>=0 && fila<jTabla.getRowCount()){
+        InscripcionData inscData = new InscripcionData();
+        Alumno alumno = (Alumno) jComboBox.getSelectedItem();
+        try {
+            Integer idMateria = (Integer) jTabla.getValueAt(fila, 0);
+            String nota = jTabla.getValueAt(fila, 2).toString();
+            Double notaAlumno = Double.parseDouble(nota);
 
+            if (notaAlumno >= 0 && notaAlumno <= 10) {
+
+                inscData.actualizarNota(alumno.getIdAlumno(), idMateria, notaAlumno);
+            } else {
+                JOptionPane.showMessageDialog(this, "La calificacion debe estar entre 0 y 10");
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Error en el valor Nota " + ex.getMessage());
+        }
+    }
+
+}
 }

@@ -139,10 +139,7 @@ public class MenuView extends javax.swing.JFrame {
         gdA.setVisible(true);
         jdEscritorio.add(gdA);
         jdEscritorio.moveToFront(gdA);
-        
-        
-        
-        
+
     }//GEN-LAST:event_jmFormularioAlumnosActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
