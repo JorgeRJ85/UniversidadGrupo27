@@ -25,8 +25,11 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     /**
      * Creates new form GestionDeAlumnos
      */
+    public boolean bol=false;
+    public int id=-1;
     public GestionDeAlumnos() {
         initComponents();
+        
     }
     
      /**
@@ -220,15 +223,16 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jbNuevoActionPerformed
     
-    private boolean bol=false;
+
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         
         AlumnoData aluDat = new AlumnoData();
 
         try {
             Alumno alu = aluDat.buscarAlumnoPorDni(Integer.parseInt(jtDocumento.getText()));
-            if (alu!=null) {
+            if (alu.getNombre()!=null) {
                 bol=true;
+                id=alu.getIdAlumno();
             }
             jtApellido.setText(alu.getApellido());
             jtNombre.setText(alu.getNombre());
@@ -258,13 +262,14 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
 
         try {
             int dni = Integer.parseInt(jtDocumento.getText()); 
-            
+
 
             if (bol != false) {
                 alu2.setApellido(jtApellido.getText());
                 alu2.setNombre(jtNombre.getText());
                 alu2.setFechaNac(jdFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 alu2.setActivo(true);
+                alu2.setIdAlumno(id);
                 aluDat.modificarAlumno(alu2);
 
             }else {
