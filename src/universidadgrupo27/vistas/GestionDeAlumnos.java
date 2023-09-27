@@ -220,7 +220,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jbNuevoActionPerformed
     
-    private boolean bol=false;
+    public boolean bol=false;
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         
         AlumnoData aluDat = new AlumnoData();
@@ -240,6 +240,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "El campo DNI debe ser numerico");
 
         } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(this, "Dato incorrecto");
         }
 
 
@@ -252,29 +253,36 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
-       
+        
         AlumnoData aluDat = new AlumnoData();
+        Alumno alu = aluDat.buscarAlumnoPorDni(Integer.parseInt(jtDocumento.getText()));
         Alumno alu2 = new Alumno();
+        Alumno alu1 = new Alumno();
 
         try {
             int dni = Integer.parseInt(jtDocumento.getText()); 
-            
+            int idA = alu.getIdAlumno();
 
             if (bol != false) {
+                alu2.setDni(dni);
                 alu2.setApellido(jtApellido.getText());
                 alu2.setNombre(jtNombre.getText());
                 alu2.setFechaNac(jdFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                
+                alu2.setIdAlumno(idA);
                 alu2.setActivo(true);
                 aluDat.modificarAlumno(alu2);
 
             }else {
                 LocalDate fech=jdFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                alu2=new Alumno(dni,jtApellido.getText(),jtNombre.getText(),fech,true);
-                aluDat.guardarAlumno(alu2);  
+                alu1=new Alumno(dni,jtApellido.getText(),jtNombre.getText(),fech,true);
+                aluDat.guardarAlumno(alu1);  
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "El campo DNI debe ser numerico");
 
+        }catch (NullPointerException nul){
+            JOptionPane.showMessageDialog(this, "Dato Incorrecto");
         }
 
 
