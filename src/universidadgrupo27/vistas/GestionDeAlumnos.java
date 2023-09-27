@@ -305,3 +305,4 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
 }
+//
