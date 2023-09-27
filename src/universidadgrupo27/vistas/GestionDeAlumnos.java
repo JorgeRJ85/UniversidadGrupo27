@@ -21,7 +21,8 @@ import universidadgrupo27.entidades.Alumno;
  * @author ilux
  */
 public class GestionDeAlumnos extends javax.swing.JInternalFrame {
-
+    private boolean bol=false;
+    private int id=-1;
     /**
      * Creates new form GestionDeAlumnos
      */
@@ -220,15 +221,16 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jbNuevoActionPerformed
     
-    public boolean bol=false;
+    
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         
         AlumnoData aluDat = new AlumnoData();
 
         try {
             Alumno alu = aluDat.buscarAlumnoPorDni(Integer.parseInt(jtDocumento.getText()));
-            if (alu!=null) {
+            if (alu.getNombre()!=null) {
                 bol=true;
+                id=alu.getIdAlumno();
             }
             jtApellido.setText(alu.getApellido());
             jtNombre.setText(alu.getNombre());
@@ -255,35 +257,29 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         
         AlumnoData aluDat = new AlumnoData();
-        Alumno alu = aluDat.buscarAlumnoPorDni(Integer.parseInt(jtDocumento.getText()));
         Alumno alu2 = new Alumno();
-        Alumno alu1 = new Alumno();
-
+ 
         try {
-            int dni = Integer.parseInt(jtDocumento.getText()); 
-            int idA = alu.getIdAlumno();
-
             if (bol != false) {
-                alu2.setDni(dni);
+                alu2.setIdAlumno(id);
+                alu2.setDni(Integer.parseInt(jtDocumento.getText()));
                 alu2.setApellido(jtApellido.getText());
                 alu2.setNombre(jtNombre.getText());
                 alu2.setFechaNac(jdFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-                
-                alu2.setIdAlumno(idA);
                 alu2.setActivo(true);
                 aluDat.modificarAlumno(alu2);
 
             }else {
                 LocalDate fech=jdFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                alu1=new Alumno(dni,jtApellido.getText(),jtNombre.getText(),fech,true);
-                aluDat.guardarAlumno(alu1);  
+                alu2=new Alumno(Integer.parseInt(jtDocumento.getText()),jtApellido.getText(),jtNombre.getText(),fech,true);
+                aluDat.guardarAlumno(alu2);   
+                
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "El campo DNI debe ser numerico");
-
-        }catch (NullPointerException nul){
-            JOptionPane.showMessageDialog(this, "Dato Incorrecto");
+            
         }
+        bol=false;
 
 
     }//GEN-LAST:event_jbGuardarActionPerformed
@@ -308,4 +304,4 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
 }
-//
+
